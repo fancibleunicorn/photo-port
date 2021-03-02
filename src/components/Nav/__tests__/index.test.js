@@ -3,17 +3,31 @@ import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Nav from '..';
 
+const categories = [
+    { name: 'portraits', description: 'Portaits of people in my life' }
+]
+const mockCurrentCategory = jest.fn();
+const mockSetCurrentCategory = jest.fn();
+
 afterEach(cleanup);
 
 describe('Nav component', () => {
     // baseline test
     it('renders', () => {
-        render(<Nav />);
+        render(<Nav
+            categories={categories}
+            setCurrentCategory={mockSetCurrentCategory}
+            currentCategory={mockSetCurrentCategory}
+            />);
     });
 
     // snapshot test
     it('matches snapshot', () => {
-        const { asFragment } = render(<Nav />);
+        const { asFragment } = render(<Nav
+            categories={categories}
+            setCurrentCategory={mockSetCurrentCategory}
+            currentCategory={mockSetCurrentCategory}
+            />);
         expect(asFragment()).toMatchSnapshot();
     })
 });
